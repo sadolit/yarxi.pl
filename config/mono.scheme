@@ -1,0 +1,46 @@
+# Одноцветная схема
+
+# Определения цветовых кодов
+# Код должен состоять из скобки [ и цифр
+# К коду добавляется "\033" в начале и "m" в конце. Получается управляющий
+# символ терминала. Подробнее читайте man console_codes.
+
+no              [0
+
+# Далее определяются вторичные, более бледные цвета.
+# Здесь используется символ ">". "a > b" означает, что b бледнее a.
+# Если для какого-то цвета не определён бледный вариант, то 
+# будет использован этот же цвет.
+
+# Далее определяются цвета для элементов статьи.
+# Должны быть определены все элементы, иначе программа будет падать.
+
+bold            no
+comment         no
+example         no
+fd		        no
+footer		    no
+kun		        no
+kun_ref		    no
+kokuji		    no
+lat		        no
+main_kanji		no
+marker_r		no
+marker_g		no
+message		    no
+names_1		    no
+names_header	no
+notedited		no
+onyomi		    no
+particle		no
+pref1		    no
+pref2		    no
+remark		    no
+rem_text		no
+rusnick		    no
+strokes		    no
+transcr_cyan	no
+transcr_red	    no
+tango_header	no
+tan_title		no
+utility		    no

@@ -1,0 +1,73 @@
+# Цветовая схема для "тёмной" консоли
+
+# Определения цветовых кодов
+# Код должен состоять из скобки [ и цифр
+# К коду добавляется "\033" в начале и "m" в конце. Получается управляющий
+# символ терминала. Подробнее читайте man console_codes.
+
+no              [0
+black           [30
+dark_red        [31
+dark_green      [32
+dark_brown      [33
+dark_blue       [34
+dark_magenta    [35
+dark_cyan       [36
+light_gray      [37
+light_red       [38
+dark_gray       [90
+pale_red        [91
+light_green     [92
+light_yellow    [93
+light_blue      [94
+light_magenta   [95
+light_cyan      [96
+
+# Далее определяются вторичные, более бледные цвета.
+# Здесь используется символ ">". "a > b" означает, что b бледнее a.
+# Если для какого-то цвета не определён бледный вариант, то 
+# будет использован этот же цвет.
+
+no            > light_gray
+dark_cyan     > dark_gray
+light_gray    > dark_gray
+light_red     > dark_red
+pale_red      > dark_red
+light_green   > dark_green
+light_yellow  > dark_brown
+light_blue    > dark_blue
+light_magenta > dark_magenta
+light_cyan    > dark_cyan
+
+# Далее определяются цвета для элементов статьи.
+# Должны быть определены все элементы, иначе программа будет падать.
+
+bold            light_green
+comment         light_blue
+example         pale_red
+fd		        light_gray
+footer		    light_gray
+kun		        light_cyan
+kun_ref		    no
+kokuji		    light_red
+lat		        light_magenta
+main_kanji		light_green
+marker_r		pale_red
+marker_g		dark_cyan
+message		    light_blue
+names_1		    light_yellow
+names_header	light_yellow
+notedited		dark_red
+onyomi		    light_cyan
+particle		light_green
+pref1		    light_blue
+pref2		    light_gray
+remark		    light_blue
+rem_text		light_gray
+rusnick		    light_gray
+strokes		    dark_gray
+transcr_cyan	light_cyan
+transcr_red		pale_red
+tango_header	light_yellow
+tan_title		light_cyan
+utility		    light_gray
