@@ -43,6 +43,7 @@ our @EXPORT = qw(
 	&search_kunyomi_russian &search_onyomi &search_tango_reading
 	&search_tango_russian &search_unicode
 	$search_show_all
+	$search_show_one
 	&fetch_kanji_full &fetch_tango_full
 	&search_rads &split_kanji
 
@@ -61,6 +62,8 @@ my $dbh = DBI->connect( "dbi:SQLite:dbname=$db_filename", "", "");
 #----------------------------------------------------------------------
 
 our $search_show_all = 0;
+
+our $search_show_one = 0;
 
 our $iteration_mark = chr(0x3005); # Символ повторения иероглифа.
 #-----------------------------------------------------------------------
@@ -387,9 +390,33 @@ sub search_compound {
 
 	my $sql = "SELECT Nomer FROM Tango WHERE";
 	my $where = "";
-	foreach my $n ( @arr ) {
-		$where .= " AND" if $where;
-		$where .= " (K1=$n OR K2=$n OR K3=$n OR K4=$n)";
+
+	if ($search_show_one ne 0) {
+		my $arr_size = @arr;
+		# You can't look up for words with more than 4 kanji.
+		if ($arr_size >= 4) {
+			return -1;
+		}
+		if ($arr_size < 4) {
+			for (my $index = $arr_size; $index <4; $index++) {
+				# 0 is no kanji.
+				push(@arr, 0);
+			}		
+		}	
+		my $ind = 1;
+		foreach my $n ( @arr ) {
+			$where .= " AND" if $where;
+			$where .= " K$ind=$n ";#
+			$ind++;
+		}
+		$where .= " AND Kana='' ";
+
+	}
+	else {
+		foreach my $n ( @arr ) {
+			$where .= " AND" if $where;
+			$where .= " (K1=$n OR K2=$n OR K3=$n OR K4=$n)";
+		}
 	}
 	$sql .= $where;
 
